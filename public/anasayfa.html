@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tourbulance – Tur ve Otel Rezervasyonu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { brand: '#0057A8', red: '#E31E24' },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .slide { display: none; }
+    .slide.active { display: block; }
+    .faq-answer { display: none; }
+    .faq-answer.open { display: block; }
+    .dot { width: 10px; height: 10px; border-radius: 9999px; background: rgba(255,255,255,0.5); transition: all .3s; cursor: pointer; }
+    .dot.active { width: 32px; background: #fff; }
+    /* Line clamp */
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+<!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+<header class="bg-[#0057A8] sticky top-0 z-50 shadow-lg">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <div class="w-9 h-9 bg-white rounded-xl flex items-center justify-center">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+        </div>
+        <div>
+          <span class="text-white font-black text-xl tracking-tight">TOURBULANCE</span>
+          <p class="text-white/60 text-[10px] -mt-0.5 tracking-widest uppercase">Seyahat Acentesi</p>
+        </div>
+      </a>
+
+      <!-- Nav -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="#" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all">Anasayfa</a>
+        <a href="#" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all">Tüm Turlar</a>
+        <a href="#" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all">Oteller</a>
+        <a href="#" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all">Blog</a>
+        <a href="#" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all">Hakkımızda</a>
+        <a href="#" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all">İletişim</a>
+      </nav>
+
+      <!-- Right -->
+      <div class="flex items-center gap-2">
+        <a href="tel:08500000000" class="hidden md:flex items-center gap-2 text-white/80 hover:text-white text-sm transition-colors">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          0850 000 00 00
+        </a>
+        <button class="bg-[#E31E24] hover:bg-[#c01a1f] text-white text-sm font-semibold px-4 py-2 rounded-xl transition-all">Giriş Yap</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════ HERO SLIDER ═══════════════════════════ -->
+<section class="relative">
+  <div class="relative h-[480px] md:h-[540px] overflow-hidden">
+
+    <!-- Slide 1 -->
+    <div class="slide active absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1664832398268-1076d497ecd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Balkan" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70"></div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="slide absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1642947392311-2aa4ba407d19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Avrupa" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70"></div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="slide absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1573481726566-9d98bb795fff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Akdeniz" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70"></div>
+    </div>
+    <!-- Slide 4 -->
+    <div class="slide absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1768069794857-9306ac167c6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Dubai" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70"></div>
+    </div>
+
+    <!-- Content overlay -->
+    <div class="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-4 pb-28">
+      <span id="slide-tag" class="inline-block bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm px-4 py-1.5 rounded-full mb-5 shadow">🏆 2026'nın En Çok Tercih Edilen Turu</span>
+      <h1 id="slide-title" class="text-white drop-shadow-xl mb-4 whitespace-pre-line" style="font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.1">Balkanları<br>Keşfet</h1>
+      <p id="slide-sub" class="text-white/80 text-lg md:text-xl mb-8 max-w-xl">6 Ülke · 24 Şehir · Vizesiz · Otobüs ile</p>
+      <a id="slide-cta" href="#" class="flex items-center gap-2 bg-[#E31E24] hover:bg-[#c01a1f] text-white px-7 py-3.5 rounded-xl font-semibold shadow-xl transition-all hover:scale-105">
+        Balkan Turlarını Gör
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- Arrows -->
+    <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all border border-white/30">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 bg-white/20 hover:bg-white/40 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all border border-white/30">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
+    <!-- Dots -->
+    <div id="dots" class="absolute bottom-28 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+      <div class="dot active" onclick="goToSlide(0)"></div>
+      <div class="dot" onclick="goToSlide(1)"></div>
+      <div class="dot" onclick="goToSlide(2)"></div>
+      <div class="dot" onclick="goToSlide(3)"></div>
+    </div>
+  </div>
+
+  <!-- Search Panel -->
+  <div class="absolute bottom-0 left-0 right-0 z-30 translate-y-1/2 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+        <!-- Tabs -->
+        <div class="flex border-b border-gray-100">
+          <button onclick="setTab('tur')" id="tab-tur" class="px-6 py-3.5 text-sm font-semibold transition-colors text-[#0057A8] border-b-2 border-[#0057A8] bg-blue-50/50">🧳 Tur Ara</button>
+          <button onclick="setTab('otel')" id="tab-otel" class="px-6 py-3.5 text-sm font-semibold transition-colors text-gray-500 hover:text-gray-700">🏨 Otel Ara</button>
+        </div>
+        <!-- Fields -->
+        <div class="p-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs text-gray-500 mb-1 font-medium">Kalkış Şehri</label>
+            <div class="relative">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-[#0057A8]" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <select class="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:outline-none focus:border-[#0057A8] appearance-none">
+                <option>İstanbul (SAW)</option>
+                <option>İstanbul (İST)</option>
+                <option>Ankara</option>
+                <option>İzmir</option>
+                <option>Antalya</option>
+                <option>Bursa</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs text-gray-500 mb-1 font-medium">Tur Tarihi</label>
+            <div class="relative">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-[#0057A8]" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <input type="date" class="w-full pl-9 pr-3 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:outline-none focus:border-[#0057A8]" />
+            </div>
+          </div>
+          <div class="flex flex-col justify-end">
+            <label class="block text-xs text-gray-500 mb-1 font-medium opacity-0 select-none">Ara</label>
+            <button class="flex items-center justify-center gap-2 bg-[#E31E24] hover:bg-[#c01a1f] text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-lg shadow-red-200">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              Ara
+            </button>
+          </div>
+        </div>
+        <!-- Popular -->
+        <div class="px-4 pb-3 flex items-center gap-2 flex-wrap">
+          <span class="text-xs text-gray-400">Popüler:</span>
+          <button class="text-xs text-[#0057A8] hover:text-[#E31E24] transition-colors px-2.5 py-1 bg-blue-50 hover:bg-red-50 rounded-lg">Balkan Turu</button>
+          <button class="text-xs text-[#0057A8] hover:text-[#E31E24] transition-colors px-2.5 py-1 bg-blue-50 hover:bg-red-50 rounded-lg">Prag &amp; Viyana</button>
+          <button class="text-xs text-[#0057A8] hover:text-[#E31E24] transition-colors px-2.5 py-1 bg-blue-50 hover:bg-red-50 rounded-lg">Santorini</button>
+          <button class="text-xs text-[#0057A8] hover:text-[#E31E24] transition-colors px-2.5 py-1 bg-blue-50 hover:bg-red-50 rounded-lg">Dubai</button>
+          <button class="text-xs text-[#0057A8] hover:text-[#E31E24] transition-colors px-2.5 py-1 bg-blue-50 hover:bg-red-50 rounded-lg">Mısır</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Spacer for search panel -->
+<div class="h-40 md:h-32"></div>
+
+<!-- ═══════════════════════════ STATS BAR ═══════════════════════════ -->
+<section class="bg-[#0057A8] pt-14 pb-10">
+  <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="flex items-center gap-4 text-white">
+      <div class="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div><p class="font-bold text-xl leading-tight">50.000+</p><p class="text-white/70 text-sm">Mutlu Yolcu</p></div>
+    </div>
+    <div class="flex items-center gap-4 text-white">
+      <div class="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+      </div>
+      <div><p class="font-bold text-xl leading-tight">10 Yıl</p><p class="text-white/70 text-sm">Sektör Deneyimi</p></div>
+    </div>
+    <div class="flex items-center gap-4 text-white">
+      <div class="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div><p class="font-bold text-xl leading-tight">TÜRSAB</p><p class="text-white/70 text-sm">Belgeli Acente</p></div>
+    </div>
+    <div class="flex items-center gap-4 text-white">
+      <div class="w-12 h-12 bg-white/15 rounded-xl flex items-center justify-center shrink-0">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      </div>
+      <div><p class="font-bold text-xl leading-tight">365 Gün</p><p class="text-white/70 text-sm">Çağrı Desteği</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ KATEGORİLER ═══════════════════════════ -->
+<section class="py-16 max-w-7xl mx-auto px-4">
+  <div class="flex items-end justify-between mb-8">
+    <div>
+      <p class="text-[#E31E24] text-sm font-semibold uppercase tracking-wider mb-1">Kategoriler</p>
+      <h2 class="text-gray-900" style="font-size:clamp(1.5rem,3vw,2rem);font-weight:700">Nereye Gitmek İstersiniz?</h2>
+    </div>
+    <a href="#" class="hidden sm:flex items-center gap-1.5 text-[#0057A8] text-sm font-medium hover:text-[#E31E24] transition-colors">
+      Tümünü Gör <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+
+    <a href="#" class="group relative h-40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+      <img src="https://images.unsplash.com/photo-1698785822764-899044655784?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Balkan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-3"><p class="text-white font-semibold text-sm drop-shadow">Balkan Turları</p><p class="text-white/70 text-xs">14 tur</p></div>
+      <div class="absolute top-3 left-3 text-xl">🏔️</div>
+    </a>
+
+    <a href="#" class="group relative h-40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+      <img src="https://images.unsplash.com/photo-1683117997469-1bd59def5c57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Avrupa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-3"><p class="text-white font-semibold text-sm drop-shadow">Avrupa Turları</p><p class="text-white/70 text-xs">22 tur</p></div>
+      <div class="absolute top-3 left-3 text-xl">🗼</div>
+    </a>
+
+    <a href="#" class="group relative h-40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+      <img src="https://images.unsplash.com/photo-1698637644147-54099497b214?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Vizesiz" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-3"><p class="text-white font-semibold text-sm drop-shadow">Vizesiz Turlar</p><p class="text-white/70 text-xs">18 tur</p></div>
+      <div class="absolute top-3 left-3 text-xl">✅</div>
+    </a>
+
+    <a href="#" class="group relative h-40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+      <img src="https://images.unsplash.com/photo-1573481726566-9d98bb795fff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Yunanistan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-3"><p class="text-white font-semibold text-sm drop-shadow">Yunanistan</p><p class="text-white/70 text-xs">9 tur</p></div>
+      <div class="absolute top-3 left-3 text-xl">🏛️</div>
+    </a>
+
+    <a href="#" class="group relative h-40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+      <img src="https://images.unsplash.com/photo-1698103182362-51abdc45d008?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="İtalya" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-3"><p class="text-white font-semibold text-sm drop-shadow">İtalya Turları</p><p class="text-white/70 text-xs">11 tur</p></div>
+      <div class="absolute top-3 left-3 text-xl">🍕</div>
+    </a>
+
+    <a href="#" class="group relative h-40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+      <img src="https://images.unsplash.com/photo-1732737900015-854072f72b56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Mısır" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-3"><p class="text-white font-semibold text-sm drop-shadow">Mısır Turları</p><p class="text-white/70 text-xs">6 tur</p></div>
+      <div class="absolute top-3 left-3 text-xl">🪬</div>
+    </a>
+
+    <a href="#" class="group relative h-40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+      <img src="https://images.unsplash.com/photo-1768069794857-9306ac167c6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Dubai" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-3"><p class="text-white font-semibold text-sm drop-shadow">Dubai Turları</p><p class="text-white/70 text-xs">5 tur</p></div>
+      <div class="absolute top-3 left-3 text-xl">🌆</div>
+    </a>
+
+    <a href="#" class="group relative h-40 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1">
+      <img src="https://images.unsplash.com/photo-1726270421477-4fe1094c2108?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Kıbrıs" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+      <div class="absolute bottom-0 left-0 right-0 p-3"><p class="text-white font-semibold text-sm drop-shadow">Kıbrıs Otelleri</p><p class="text-white/70 text-xs">8 tur</p></div>
+      <div class="absolute top-3 left-3 text-xl">🏖️</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ÖNE ÇIKAN TURLAR ═══════════════════════════ -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <p class="text-[#E31E24] text-sm font-semibold uppercase tracking-wider mb-1 flex items-center gap-2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          Öne Çıkan
+        </p>
+        <h2 class="text-gray-900" style="font-size:clamp(1.5rem,3vw,2rem);font-weight:700">En Çok Tercih Edilen Turlar</h2>
+      </div>
+      <a href="#" class="hidden sm:flex items-center gap-1.5 text-[#0057A8] text-sm font-medium hover:text-[#E31E24] transition-colors">Tüm Turlar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Tour Card 1 -->
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1717193342663-32fcd9583417?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Balkan Turu" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 text-white text-xs font-bold px-2.5 py-1 rounded-lg" style="background:#10b981">7+ Kişi</span>
+          <span class="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-lg border border-white/30">✅ Vizesiz</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 leading-snug mb-1 group-hover:text-[#0057A8] transition-colors line-clamp-2">Sabiha Gökçen Çıkışlı Balkan Turu</h3>
+          <p class="text-xs text-gray-500 mb-3">İstanbul (SAW) → Belgrad → Bükreş → Sofya → Ohrid</p>
+          <div class="flex items-center gap-3 mb-4">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="text-sm text-gray-600">23.02.2026</span>
+            <span class="text-gray-300">|</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="text-sm text-gray-600">7G 8G</span>
+            <span class="text-gray-300">|</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v9a2 2 0 01-2 2h-2"/><rect x="9" y="11" width="8" height="10"/></svg>
+            <span class="text-sm text-gray-600">Otobüs</span>
+          </div>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div>
+              <p class="text-xs text-gray-400 line-through">885 €</p>
+              <p class="text-[#E31E24] font-bold text-lg leading-tight">599 €</p>
+              <p class="text-xs text-gray-400">kişi başı</p>
+            </div>
+            <span class="flex items-center gap-1.5 text-sm font-semibold text-white bg-[#0057A8] hover:bg-[#E31E24] px-4 py-2 rounded-xl transition-colors">
+              İncele
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Tour Card 2 -->
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1631556892918-3e6cb60aeb55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="İstanbul Balkan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 text-white text-xs font-bold px-2.5 py-1 rounded-lg" style="background:#f97316">Kesin Kalkış</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 leading-snug mb-1 group-hover:text-[#0057A8] transition-colors line-clamp-2">İstanbul Çıkışlı Balkan Turu (THY)</h3>
+          <p class="text-xs text-gray-500 mb-3">İstanbul → Sofya → Skopje → Podgorica → Sarajevo</p>
+          <div class="flex items-center gap-3 mb-4">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="text-sm text-gray-600">15.03.2026</span>
+            <span class="text-gray-300">|</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="text-sm text-gray-600">6G 7G</span>
+            <span class="text-gray-300">|</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <span class="text-sm text-gray-600">Uçak</span>
+          </div>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div>
+              <p class="text-[#E31E24] font-bold text-lg leading-tight">749 €</p>
+              <p class="text-xs text-gray-400">kişi başı</p>
+            </div>
+            <span class="flex items-center gap-1.5 text-sm font-semibold text-white bg-[#0057A8] hover:bg-[#E31E24] px-4 py-2 rounded-xl transition-colors">
+              İncele
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Tour Card 3 -->
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1637013252559-96b426f46d77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Prag Viyana" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          <span class="absolute top-3 left-3 bg-[#E31E24] text-white text-xs font-bold px-2.5 py-1 rounded-lg">%23 İndirim</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 leading-snug mb-1 group-hover:text-[#0057A8] transition-colors line-clamp-2">Rüya Avrupa Turu – Prag &amp; Viyana &amp; Budapeşte</h3>
+          <p class="text-xs text-gray-500 mb-3">İstanbul → Prag → Viyana → Salzburg → Budapeşte</p>
+          <div class="flex items-center gap-3 mb-4">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span class="text-sm text-gray-600">05.04.2026</span>
+            <span class="text-gray-300">|</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="text-sm text-gray-600">8G 9G</span>
+            <span class="text-gray-300">|</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <span class="text-sm text-gray-600">Uçak</span>
+          </div>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div>
+              <p class="text-xs text-gray-400 line-through">1.290 €</p>
+              <p class="text-[#E31E24] font-bold text-lg leading-tight">990 €</p>
+              <p class="text-xs text-gray-400">kişi başı</p>
+            </div>
+            <span class="flex items-center gap-1.5 text-sm font-semibold text-white bg-[#0057A8] hover:bg-[#E31E24] px-4 py-2 rounded-xl transition-colors">
+              İncele
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#" class="inline-flex items-center gap-2 border-2 border-[#0057A8] text-[#0057A8] hover:bg-[#0057A8] hover:text-white px-8 py-3 rounded-xl font-semibold transition-all">
+        Tüm Turları Gör <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ BALKAN TURLARI ═══════════════════════════ -->
+<section class="py-16 max-w-7xl mx-auto px-4">
+  <div class="relative h-52 md:h-64 rounded-3xl overflow-hidden mb-10 shadow-xl">
+    <img src="https://images.unsplash.com/photo-1664832398268-1076d497ecd9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Balkan" class="w-full h-full object-cover" />
+    <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(0,87,168,0.9),rgba(0,87,168,0.6),transparent)"></div>
+    <div class="absolute inset-0 flex flex-col justify-center pl-8 md:pl-14">
+      <span class="text-white/80 text-sm font-medium mb-2">🏔️ Vizesiz Seyahat</span>
+      <h2 class="text-white mb-3" style="font-size:clamp(1.6rem,4vw,2.5rem);font-weight:800">Balkan Turları</h2>
+      <p class="text-white/80 text-sm max-w-sm mb-5">6 Ülke, 24 Şehir. Otobüs ile vizesiz Balkan keşfi.</p>
+      <a href="#" class="inline-flex items-center gap-2 bg-white text-[#0057A8] hover:bg-[#E31E24] hover:text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all w-fit">
+        Tüm Balkan Turları <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <!-- Same 3 tour cards structure repeated (abbreviated) -->
+    <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+      <div class="relative h-52 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1717193342663-32fcd9583417?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Balkan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+        <span class="absolute top-3 left-3 text-white text-xs font-bold px-2.5 py-1 rounded-lg" style="background:#10b981">7+ Kişi</span>
+        <span class="absolute top-3 right-3 bg-white/20 backdrop-blur-sm text-white text-xs px-2.5 py-1 rounded-lg border border-white/30">✅ Vizesiz</span>
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">Sabiha Gökçen Çıkışlı Balkan Turu</h3>
+        <p class="text-xs text-gray-500 mb-3">İstanbul (SAW) → Belgrad → Bükreş → Sofya</p>
+        <div class="flex items-center gap-3 text-sm text-gray-600 mb-4">
+          <span>23.02.2026</span><span class="text-gray-300">|</span><span>7G 8G</span><span class="text-gray-300">|</span><span>Otobüs</span>
+        </div>
+        <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+          <div><p class="text-xs text-gray-400 line-through">885 €</p><p class="text-[#E31E24] font-bold text-lg">599 €</p></div>
+          <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+      <div class="relative h-52 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1631556892918-3e6cb60aeb55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Balkan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+        <span class="absolute top-3 left-3 text-white text-xs font-bold px-2.5 py-1 rounded-lg" style="background:#f97316">Kesin Kalkış</span>
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">İstanbul Çıkışlı Balkan Turu (THY)</h3>
+        <p class="text-xs text-gray-500 mb-3">İstanbul → Sofya → Skopje → Saraybosna</p>
+        <div class="flex items-center gap-3 text-sm text-gray-600 mb-4">
+          <span>15.03.2026</span><span class="text-gray-300">|</span><span>6G 7G</span><span class="text-gray-300">|</span><span>Uçak</span>
+        </div>
+        <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+          <div><p class="text-[#E31E24] font-bold text-lg">749 €</p></div>
+          <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+        </div>
+      </div>
+    </a>
+    <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+      <div class="relative h-52 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1698785822764-899044655784?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Balkan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">Büyük Balkan &amp; Adriyatik Turu</h3>
+        <p class="text-xs text-gray-500 mb-3">İstanbul → Tiran → Kotor → Dubrovnik</p>
+        <div class="flex items-center gap-3 text-sm text-gray-600 mb-4">
+          <span>22.03.2026</span><span class="text-gray-300">|</span><span>9G 10G</span><span class="text-gray-300">|</span><span>Otobüs</span>
+        </div>
+        <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+          <div><p class="text-[#E31E24] font-bold text-lg">699 €</p></div>
+          <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ VİZESİZ TURLAR ═══════════════════════════ -->
+<section class="py-16 bg-emerald-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <p class="text-emerald-600 text-sm font-semibold uppercase tracking-wider mb-1 flex items-center gap-2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Pasaport Yeterli
+        </p>
+        <h2 class="text-gray-900" style="font-size:clamp(1.5rem,3vw,2rem);font-weight:700">Vizesiz Turlar</h2>
+        <p class="text-gray-500 text-sm mt-1">Sadece pasaport ile seyahat edebileceğiniz turlar</p>
+      </div>
+      <a href="#" class="hidden sm:flex items-center gap-1.5 text-emerald-600 text-sm font-medium hover:text-emerald-800 transition-colors">Tümünü Gör <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1717193342663-32fcd9583417?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Vizesiz" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">✅ Vizesiz</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">Sabiha Gökçen Çıkışlı Balkan Turu</h3>
+          <p class="text-xs text-gray-500 mb-3">6 Ülke · 24 Şehir · Otobüs</p>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div><p class="text-xs text-gray-400 line-through">885 €</p><p class="text-[#E31E24] font-bold text-lg">599 €</p></div>
+            <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1573481726566-9d98bb795fff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Vizesiz" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">✅ Vizesiz</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">Akdeniz &amp; Ege Adaları Turu</h3>
+          <p class="text-xs text-gray-500 mb-3">Santorini · Mikonos · Rodos · Atina</p>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div><p class="text-[#E31E24] font-bold text-lg">549 €</p></div>
+            <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1698785822764-899044655784?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Vizesiz" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 right-3 bg-emerald-500 text-white text-xs font-bold px-2.5 py-1 rounded-lg">✅ Vizesiz</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">Büyük Balkan &amp; Adriyatik Turu</h3>
+          <p class="text-xs text-gray-500 mb-3">7 Ülke · 28 Şehir · Otobüs</p>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div><p class="text-[#E31E24] font-bold text-lg">699 €</p></div>
+            <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ AVRUPA TURLARI ═══════════════════════════ -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="relative h-52 md:h-64 rounded-3xl overflow-hidden mb-10 shadow-xl">
+      <img src="https://images.unsplash.com/photo-1683117997469-1bd59def5c57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Avrupa" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
+      <div class="absolute inset-0 flex flex-col justify-center pl-8 md:pl-14">
+        <span class="text-white/80 text-sm font-medium mb-2">✈️ Uçaklı Turlar</span>
+        <h2 class="text-white mb-3" style="font-size:clamp(1.6rem,4vw,2.5rem);font-weight:800">Avrupa Turları</h2>
+        <p class="text-white/80 text-sm max-w-sm mb-5">Paris, Roma, Viyana, Prag ve daha fazlası.</p>
+        <a href="#" class="inline-flex items-center gap-2 bg-[#E31E24] text-white hover:bg-white hover:text-[#E31E24] px-5 py-2.5 rounded-xl font-semibold text-sm transition-all w-fit">
+          Tüm Avrupa Turları <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1637013252559-96b426f46d77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Prag" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#E31E24] text-white text-xs font-bold px-2.5 py-1 rounded-lg">%23 İndirim</span>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">Prag &amp; Viyana &amp; Budapeşte</h3>
+          <p class="text-xs text-gray-500 mb-3">4 Ülke · 12 Şehir · THY</p>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div><p class="text-xs text-gray-400 line-through">1.290 €</p><p class="text-[#E31E24] font-bold text-lg">990 €</p></div>
+            <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1698103182362-51abdc45d008?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Roma" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">İtalya Grand Turu – Roma &amp; Floransa</h3>
+          <p class="text-xs text-gray-500 mb-3">3 Şehir · 8 Gece · THY</p>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div><p class="text-[#E31E24] font-bold text-lg">1.099 €</p></div>
+            <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-52 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1573481726566-9d98bb795fff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Paris" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 mb-1 group-hover:text-[#0057A8] transition-colors">Paris &amp; Barselona &amp; Nice Turu</h3>
+          <p class="text-xs text-gray-500 mb-3">3 Ülke · 5 Şehir · THY</p>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div><p class="text-[#E31E24] font-bold text-lg">1.199 €</p></div>
+            <span class="text-sm font-semibold text-white bg-[#0057A8] px-4 py-2 rounded-xl">İncele →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ÖNE ÇIKAN OTELLER ═══════════════════════════ -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="relative h-52 md:h-60 rounded-3xl overflow-hidden mb-10 shadow-xl">
+      <img src="https://images.unsplash.com/flagged/photo-1557006027-cf0673ec2cfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="Oteller" class="w-full h-full object-cover" />
+      <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(0,87,168,0.9),rgba(0,87,168,0.55),transparent)"></div>
+      <div class="absolute inset-0 flex flex-col justify-center pl-8 md:pl-14">
+        <span class="text-white/80 text-sm font-medium mb-2">🏨 Lüks &amp; Konfor</span>
+        <h2 class="text-white mb-3" style="font-size:clamp(1.6rem,4vw,2.5rem);font-weight:800">Öne Çıkan Oteller</h2>
+        <p class="text-white/80 text-sm max-w-sm mb-5">Kıbrıs, Antalya ve daha fazlası. Ultra her şey dahil konseptiyle.</p>
+        <a href="#" class="inline-flex items-center gap-2 bg-white text-[#0057A8] hover:bg-[#E31E24] hover:text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all w-fit">
+          Tüm Oteller <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <!-- Hotel 1: Rocks Hotel Resort -->
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/flagged/photo-1557006027-cf0673ec2cfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Rocks Hotel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute top-3 left-3 flex items-center gap-0.5 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-lg">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="absolute top-3 right-3 bg-[#E31E24] text-white text-[10px] font-bold px-2 py-0.5 rounded-lg">Fırsat</span>
+          <div class="absolute bottom-3 left-3"><span class="bg-[#0057A8] text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">Ultra Her Şey Dahil</span></div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 text-sm leading-snug mb-1 group-hover:text-[#0057A8] transition-colors">Rocks Hotel Resort</h3>
+          <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Girne, Kıbrıs
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-[#0057A8] text-white text-xs font-bold px-2 py-0.5 rounded-lg">9.0</span>
+            <span class="text-xs text-gray-600 font-medium">Mükemmel</span>
+            <span class="text-xs text-gray-400">(248)</span>
+          </div>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div>
+              <p class="text-[10px] text-gray-400 line-through mb-0.5">4.941 ₺</p>
+              <p class="text-[#E31E24] font-bold text-base leading-tight">4.200 <span class="text-sm">₺</span></p>
+              <p class="text-[10px] text-gray-400">kişi başı / gece</p>
+            </div>
+            <span class="text-xs text-[#0057A8] font-semibold bg-blue-50 px-2.5 py-1 rounded-lg group-hover:bg-[#0057A8] group-hover:text-white transition-colors">İncele →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Hotel 2: Limak Cyprus -->
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1719558605998-b6c2218d975d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Limak" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute top-3 left-3 flex items-center gap-0.5 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-lg">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="absolute top-3 right-3 bg-[#E31E24] text-white text-[10px] font-bold px-2 py-0.5 rounded-lg">Fırsat</span>
+          <div class="absolute bottom-3 left-3"><span class="bg-[#0057A8] text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">Ultra Her Şey Dahil</span></div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 text-sm leading-snug mb-1 group-hover:text-[#0057A8] transition-colors">Limak Cyprus Deluxe Hotel</h3>
+          <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Bafra, Kıbrıs
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-[#0057A8] text-white text-xs font-bold px-2 py-0.5 rounded-lg">4.9</span>
+            <span class="text-xs text-gray-600 font-medium">Muhteşem</span>
+            <span class="text-xs text-gray-400">(512)</span>
+          </div>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div>
+              <p class="text-[#E31E24] font-bold text-base leading-tight">12.800 <span class="text-sm">₺</span></p>
+              <p class="text-[10px] text-gray-400">kişi başı / gece</p>
+            </div>
+            <span class="text-xs text-[#0057A8] font-semibold bg-blue-50 px-2.5 py-1 rounded-lg group-hover:bg-[#0057A8] group-hover:text-white transition-colors">İncele →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Hotel 3: Kaya Palazzo -->
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/flagged/photo-1557006027-cf0673ec2cfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Kaya Palazzo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute top-3 left-3 flex items-center gap-0.5 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-lg">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="absolute top-3 right-3 bg-[#E31E24] text-white text-[10px] font-bold px-2 py-0.5 rounded-lg">Fırsat</span>
+          <div class="absolute bottom-3 left-3"><span class="bg-[#0057A8] text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">Ultra Her Şey Dahil</span></div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 text-sm leading-snug mb-1 group-hover:text-[#0057A8] transition-colors">Kaya Palazzo Resort</h3>
+          <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Girne, Kıbrıs
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-[#0057A8] text-white text-xs font-bold px-2 py-0.5 rounded-lg">9.2</span>
+            <span class="text-xs text-gray-600 font-medium">Mükemmel</span>
+            <span class="text-xs text-gray-400">(634)</span>
+          </div>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div>
+              <p class="text-[#E31E24] font-bold text-base leading-tight">15.200 <span class="text-sm">₺</span></p>
+              <p class="text-[10px] text-gray-400">kişi başı / gece</p>
+            </div>
+            <span class="text-xs text-[#0057A8] font-semibold bg-blue-50 px-2.5 py-1 rounded-lg group-hover:bg-[#0057A8] group-hover:text-white transition-colors">İncele →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Hotel 4: Elexus -->
+      <a href="#" class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden hover:-translate-y-1 block">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600" alt="Elexus" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <div class="absolute top-3 left-3 flex items-center gap-0.5 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-lg">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="absolute bottom-3 left-3"><span class="bg-[#0057A8] text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">Her Şey Dahil</span></div>
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-gray-900 text-sm leading-snug mb-1 group-hover:text-[#0057A8] transition-colors">Elexus Hotel Resort</h3>
+          <div class="flex items-center gap-1.5 text-xs text-gray-500 mb-3">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#0057A8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Girne, Kıbrıs
+          </div>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="bg-[#0057A8] text-white text-xs font-bold px-2 py-0.5 rounded-lg">8.7</span>
+            <span class="text-xs text-gray-600 font-medium">Harika</span>
+            <span class="text-xs text-gray-400">(389)</span>
+          </div>
+          <div class="flex items-end justify-between border-t border-gray-100 pt-3">
+            <div>
+              <p class="text-[#E31E24] font-bold text-base leading-tight">12.800 <span class="text-sm">₺</span></p>
+              <p class="text-[10px] text-gray-400">kişi başı / gece</p>
+            </div>
+            <span class="text-xs text-[#0057A8] font-semibold bg-blue-50 px-2.5 py-1 rounded-lg group-hover:bg-[#0057A8] group-hover:text-white transition-colors">İncele →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="text-center mt-8">
+      <a href="#" class="inline-flex items-center gap-2 border-2 border-[#0057A8] text-[#0057A8] hover:bg-[#0057A8] hover:text-white px-8 py-3 rounded-xl font-semibold transition-all">
+        Tüm Otelleri Gör <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ SSS ═══════════════════════════ -->
+<section class="py-16 bg-gray-50">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <p class="text-[#E31E24] text-sm font-semibold uppercase tracking-wider mb-2">SSS</p>
+      <h2 class="text-gray-900 mb-3" style="font-size:clamp(1.5rem,3vw,2rem);font-weight:700">Sık Sorulan Sorular</h2>
+      <p class="text-gray-500">Aklınızdaki soruları yanıtlıyoruz. Daha fazlası için bize ulaşın.</p>
+    </div>
+    <div class="space-y-3" id="faq-list">
+
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <button onclick="toggleFaq(0)" class="w-full flex items-center justify-between gap-4 p-5 text-left">
+          <span class="font-semibold text-gray-900 text-sm leading-snug">Vizesiz turlar için hangi belgeler gerekli?</span>
+          <svg id="faq-icon-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="faq-0" class="faq-answer px-5 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">Vizesiz Balkan turlarımız için geçerli TC kimlik kartı veya pasaport yeterlidir. Pasaportun seyahat tarihi itibarıyla en az 6 ay geçerlilik süresi olması gerekmektedir.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <button onclick="toggleFaq(1)" class="w-full flex items-center justify-between gap-4 p-5 text-left">
+          <span class="font-semibold text-gray-900 text-sm leading-snug">Tur fiyatlarına neler dahildir?</span>
+          <svg id="faq-icon-1" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="faq-1" class="faq-answer px-5 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">Tur fiyatlarımıza ulaşım (otobüs veya uçak), 4 yıldızlı otellerde konaklama, kahvaltı ve akşam yemeği, Türkçe konuşan profesyonel rehber, gezi girişleri ve seyahat sigortası dahildir.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <button onclick="toggleFaq(2)" class="w-full flex items-center justify-between gap-4 p-5 text-left">
+          <span class="font-semibold text-gray-900 text-sm leading-snug">Rezervasyon iptali durumunda ne olur?</span>
+          <svg id="faq-icon-2" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="faq-2" class="faq-answer px-5 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">Tur başlangıç tarihinden 30 gün öncesine kadar yapılan iptallerde tam iade yapılır. 30-15 gün arasında %50, 15 günden kısa sürede ise iade yapılmamaktadır.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <button onclick="toggleFaq(3)" class="w-full flex items-center justify-between gap-4 p-5 text-left">
+          <span class="font-semibold text-gray-900 text-sm leading-snug">Taksitli ödeme imkânı var mı?</span>
+          <svg id="faq-icon-3" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="faq-3" class="faq-answer px-5 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">Evet! Tüm kredi kartlarıyla 12 aya kadar taksit imkânı sunulmaktadır. Erken rezervasyon indirimlerinden yararlanmak için tur başlangıcından en az 60 gün önce rezervasyon yapmanızı öneririz.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <button onclick="toggleFaq(4)" class="w-full flex items-center justify-between gap-4 p-5 text-left">
+          <span class="font-semibold text-gray-900 text-sm leading-snug">Grup indirimi uygulanıyor mu?</span>
+          <svg id="faq-icon-4" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="faq-4" class="faq-answer px-5 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">8 kişi ve üzeri gruplarda %10, 15 kişi ve üzerinde %15 grup indirimi uygulanmaktadır. Kurumsal turlar için özel fiyatlandırma için bizimle iletişime geçin.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <button onclick="toggleFaq(5)" class="w-full flex items-center justify-between gap-4 p-5 text-left">
+          <span class="font-semibold text-gray-900 text-sm leading-snug">Çocuklar tura katılabilir mi?</span>
+          <svg id="faq-icon-5" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div id="faq-5" class="faq-answer px-5 pb-5">
+          <p class="text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">2-12 yaş arası çocuklar için %30 çocuk indirimi uygulanmaktadır. 2 yaş altı çocuklar ücretsiz seyahat edebilir (koltuk tahsisi yapılmaz).</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ BLOG ═══════════════════════════ -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <p class="text-[#E31E24] text-sm font-semibold uppercase tracking-wider mb-1">Blog</p>
+        <h2 class="text-gray-900" style="font-size:clamp(1.5rem,3vw,2rem);font-weight:700">Seyahat Rehberi &amp; İpuçları</h2>
+      </div>
+      <a href="#" class="hidden sm:flex items-center gap-1.5 text-[#0057A8] text-sm font-medium hover:text-[#E31E24] transition-colors">
+        Tüm Yazılar <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <article class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all overflow-hidden hover:-translate-y-1">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1713459268796-6d1218e16900?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Blog 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#0057A8] text-white text-xs px-3 py-1 rounded-full font-medium">Seyahat Rehberi</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-3 text-xs text-gray-400 mb-3"><span>15 Ocak 2026</span><span>·</span><span>5 dk okuma</span></div>
+          <h3 class="font-semibold text-gray-900 leading-snug mb-2 group-hover:text-[#0057A8] transition-colors">Balkan Turu Öncesi Bilmeniz Gereken 10 Şey</h3>
+          <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">Vizesiz Balkan turuna çıkmadan önce bu ipuçlarını mutlaka okuyun. Pasaport gereksinimleri, para birimi ve daha fazlası...</p>
+          <a href="#" class="flex items-center gap-1.5 text-[#E31E24] text-sm font-semibold hover:gap-3 transition-all">Devamını Oku <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </article>
+
+      <article class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all overflow-hidden hover:-translate-y-1">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1698785822764-899044655784?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Blog 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#0057A8] text-white text-xs px-3 py-1 rounded-full font-medium">Destinasyon</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-3 text-xs text-gray-400 mb-3"><span>8 Şubat 2026</span><span>·</span><span>7 dk okuma</span></div>
+          <h3 class="font-semibold text-gray-900 leading-snug mb-2 group-hover:text-[#0057A8] transition-colors">Kotor Körfezi: Adriyatik'in Saklı Cenneti</h3>
+          <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">Orta Çağ surlarıyla çevrili bu masalsı şehre neden mutlaka gitmelisiniz? İşte Kotor'un büyüleyici tarihi...</p>
+          <a href="#" class="flex items-center gap-1.5 text-[#E31E24] text-sm font-semibold hover:gap-3 transition-all">Devamını Oku <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </article>
+
+      <article class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all overflow-hidden hover:-translate-y-1">
+        <div class="relative h-48 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1726270421477-4fe1094c2108?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800" alt="Blog 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          <span class="absolute top-3 left-3 bg-[#0057A8] text-white text-xs px-3 py-1 rounded-full font-medium">İpuçları</span>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center gap-3 text-xs text-gray-400 mb-3"><span>2 Mart 2026</span><span>·</span><span>4 dk okuma</span></div>
+          <h3 class="font-semibold text-gray-900 leading-snug mb-2 group-hover:text-[#0057A8] transition-colors">Yurt Dışı Seyahatte Bütçenizi Nasıl Yönetirsiniz?</h3>
+          <p class="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">Avrupa'da seyahat ederken para biriktirmenin en akıllı yolları. Euro kuruna karşı korunma stratejileri...</p>
+          <a href="#" class="flex items-center gap-1.5 text-[#E31E24] text-sm font-semibold hover:gap-3 transition-all">Devamını Oku <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ İLETİŞİM CTA ═══════════════════════════ -->
+<section class="py-20 relative overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1698785822764-899044655784?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1920" alt="CTA" class="w-full h-full object-cover" />
+    <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(0,87,168,0.95),rgba(0,61,122,0.9))"></div>
+  </div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
+    <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 px-4 py-2 rounded-full text-sm mb-6">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#fbbf24" stroke="#fbbf24" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      10 Yıldır Güvenilir Seyahat Partneri
+    </div>
+    <h2 class="text-white mb-4" style="font-size:clamp(1.8rem,4vw,3rem);font-weight:800">Hayalinizdeki Tatil<br>Bir Telefon Uzağınızda</h2>
+    <p class="text-white/80 text-lg mb-10 max-w-xl mx-auto">Uzman tur danışmanlarımız size özel en uygun turu bulmak için hazır. 365 gün, 7/24 çağrı desteği.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+      <a href="tel:08500000000" class="flex items-center gap-3 bg-white text-[#0057A8] hover:bg-[#E31E24] hover:text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all shadow-xl">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        0850 000 00 00
+      </a>
+      <a href="mailto:info@tourbulance.com" class="flex items-center gap-3 bg-white/20 hover:bg-white hover:text-[#0057A8] text-white border-2 border-white/50 px-8 py-4 rounded-2xl font-bold text-lg transition-all backdrop-blur-sm">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        E-posta Gönder
+      </a>
+    </div>
+    <div class="flex flex-wrap justify-center gap-6 text-white/70 text-sm">
+      <div class="flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>TÜRSAB Belgeli</div>
+      <div class="flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>10 Yıl Deneyim</div>
+      <div class="flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>50.000+ Yolcu</div>
+      <div class="flex items-center gap-2"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Para İade Garantisi</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-9 h-9 bg-[#0057A8] rounded-xl flex items-center justify-center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          </div>
+          <span class="text-white font-black text-xl tracking-tight">TOURBULANCE</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed mb-4">10 yılı aşkın tecrübemizle Türkiye'nin en güvenilir tur acentelerinden biri olarak hizmet veriyoruz.</p>
+        <div class="flex items-center gap-2 text-sm text-gray-400 mb-2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 13a19.79 19.79 0 01-3.07-8.67A2 2 0 012.18 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          0850 000 00 00
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-400">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@tourbulance.com
+        </div>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-white mb-4">Turlar</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="#" class="hover:text-white transition-colors">Balkan Turları</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Avrupa Turları</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Vizesiz Turlar</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Yunanistan Turları</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">İtalya Turları</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Dubai Turları</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-white mb-4">Oteller</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="#" class="hover:text-white transition-colors">Kıbrıs Otelleri</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Antalya Otelleri</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Bodrum Otelleri</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Marmaris Otelleri</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Her Şey Dahil</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Lüks Oteller</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-white mb-4">Kurumsal</h4>
+        <ul class="space-y-2 text-sm text-gray-400">
+          <li><a href="#" class="hover:text-white transition-colors">Hakkımızda</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">İletişim</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Gizlilik Politikası</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">TÜRSAB Belgesi</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+      <p>© 2026 Tourbulance Turizm A.Ş. Tüm hakları saklıdır.</p>
+      <div class="flex items-center gap-2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="h-6 opacity-60" />
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Former_Visa_%28company%29_logo.svg" alt="Visa" class="h-5 opacity-60" />
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════ JAVASCRIPT ═══════════════════════════ -->
+<script>
+  /* ─── SLIDER ─── */
+  const slideData = [
+    { tag: "🏆 2026'nın En Çok Tercih Edilen Turu", title: "Balkanları\nKeşfet", sub: "6 Ülke · 24 Şehir · Vizesiz · Otobüs ile", cta: "Balkan Turlarını Gör" },
+    { tag: "✈️ Uçaklı Avrupa", title: "Avrupa'nın\nBaşkentleri", sub: "Paris · Viyana · Roma · Barselona", cta: "Avrupa Turlarını İncele" },
+    { tag: "🌊 Yaz Özel", title: "Akdeniz &\nEge Rüyası", sub: "Santorini · Mikonos · Rodos · Atina", cta: "Ada Turlarına Bak" },
+    { tag: "🌟 Egzotik Destinasyonlar", title: "Dubai &\nMısır Turu", sub: "Lüks Oteller · Çöl Safarisi · Piramitler", cta: "Egzotik Turlar" },
+  ];
+
+  let current = 0;
+  let timer = null;
+
+  function updateSliderUI() {
+    document.querySelectorAll('.slide').forEach((s, i) => {
+      s.classList.toggle('active', i === current);
+    });
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+      d.style.width = i === current ? '32px' : '10px';
+    });
+    const d = slideData[current];
+    document.getElementById('slide-tag').textContent = d.tag;
+    document.getElementById('slide-title').innerHTML = d.title.replace('\n', '<br>');
+    document.getElementById('slide-sub').textContent = d.sub;
+    document.getElementById('slide-cta').childNodes[0].textContent = d.cta + ' ';
+  }
+
+  function goToSlide(n) {
+    current = n;
+    updateSliderUI();
+    resetTimer();
+  }
+
+  function nextSlide() { goToSlide((current + 1) % 4); }
+  function prevSlide() { goToSlide((current + 3) % 4); }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 5500);
+  }
+
+  resetTimer();
+
+  /* ─── SEARCH TABS ─── */
+  function setTab(tab) {
+    ['tur', 'otel'].forEach(t => {
+      const el = document.getElementById('tab-' + t);
+      if (t === tab) {
+        el.className = 'px-6 py-3.5 text-sm font-semibold transition-colors text-[#0057A8] border-b-2 border-[#0057A8] bg-blue-50/50';
+      } else {
+        el.className = 'px-6 py-3.5 text-sm font-semibold transition-colors text-gray-500 hover:text-gray-700';
+      }
+    });
+  }
+
+  /* ─── FAQ ACCORDION ─── */
+  function toggleFaq(i) {
+    const el = document.getElementById('faq-' + i);
+    const icon = document.getElementById('faq-icon-' + i);
+    const isOpen = el.classList.contains('open');
+    // Close all
+    for (let j = 0; j < 6; j++) {
+      document.getElementById('faq-' + j).classList.remove('open');
+      document.getElementById('faq-icon-' + j).setAttribute('stroke', '#9ca3af');
+      document.getElementById('faq-icon-' + j).querySelector('polyline').setAttribute('points', '6 9 12 15 18 9');
+    }
+    if (!isOpen) {
+      el.classList.add('open');
+      icon.setAttribute('stroke', '#E31E24');
+      icon.querySelector('polyline').setAttribute('points', '18 15 12 9 6 15');
+    }
+  }
+</script>
+
+</body>
+</html>
