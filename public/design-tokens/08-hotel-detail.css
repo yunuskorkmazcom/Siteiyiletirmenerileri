@@ -1,0 +1,373 @@
+/*
+ * ═══════════════════════════════════════════════════════════
+ *  TOURBULANCE — HotelDetailPage  (/src/app/pages/HotelDetailPage.tsx)
+ * ═══════════════════════════════════════════════════════════
+ */
+
+/* ──────────────────────────────────────────────────────────
+   SAYFA GENEL
+────────────────────────────────────────────────────────── */
+.page-hotel-detail {
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HERO GALERİ
+────────────────────────────────────────────────────────── */
+.hotel-gallery {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .hotel-gallery { height: 360px; }
+}
+
+/* "Tüm Fotoğraflar" butonu */
+.hotel-gallery__all-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background-color: rgba(255,255,255,0.90);
+  backdrop-filter: blur(4px);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background-color 0.2s;
+}
+.hotel-gallery__all-btn:hover { background-color: #ffffff; }
+
+/* ──────────────────────────────────────────────────────────
+   OTEL BAŞLIK KARTI
+────────────────────────────────────────────────────────── */
+.hotel-header-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 20px 24px;
+}
+
+/* Otel adı H1 */
+.hotel-header-card__h1 {
+  color: #111827;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.hotel-header-card__location {
+  color: #0057A8;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hotel-header-card__map-btn {
+  color: #0057A8;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Puan kutusu (teal) */
+.hotel-rating-box {
+  background-color: #0dbac6;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 12px 16px;
+  text-align: center;
+  min-width: 90px;
+}
+
+.hotel-rating-box__score {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hotel-rating-box__label {
+  font-size: 0.75rem;
+  margin-top: 2px;
+  font-weight: 600;
+}
+
+.hotel-rating-box__sub {
+  font-size: 0.625rem;              /* 10px */
+  color: rgba(255,255,255,0.70);
+  margin-top: 2px;
+}
+
+/* Paylaş / Beğen butonu */
+.hotel-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.hotel-action-btn:hover {
+  border-color: #0057A8;
+  color: #0057A8;
+}
+.hotel-action-btn--liked {
+  border-color: #fca5a5;
+  color: #ef4444;
+  background-color: #fef2f2;
+}
+
+/* ──────────────────────────────────────────────────────────
+   BÖLÜM KARTLARI (Oda Seçin, Tesis Notları, vb.)
+────────────────────────────────────────────────────────── */
+.hotel-section-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+
+/* Tüm bölüm H2'leri aynı stil */
+.hotel-section-card__h2 {
+  color: #111827;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* Genel Tanıtım alt başlığı */
+.hotel-section-card__sub-label {
+  color: #0057A8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+/* Oda kartı */
+.hotel-room-card {
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+@media (min-width: 640px) {
+  .hotel-room-card { flex-direction: row; }
+}
+.hotel-room-card--available:hover {
+  border-color: #0057A8;
+  box-shadow: 0 4px 16px rgba(0,87,168,0.12);
+}
+.hotel-room-card--unavailable {
+  border-color: #f3f4f6;
+  background-color: #f9fafb;
+  opacity: 0.60;
+}
+
+.hotel-room-card__image-wrap {
+  position: relative;
+  width: 100%;
+  height: 144px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+@media (min-width: 640px) {
+  .hotel-room-card__image-wrap {
+    width: 176px;
+    height: auto;
+  }
+}
+
+.hotel-room-card__name {
+  font-weight: 700;
+  color: #111827;
+  font-size: 0.9375rem;
+  margin-bottom: 4px;
+}
+
+.hotel-room-card__feature {
+  font-size: 0.75rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.hotel-room-card__price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #E31E24;
+}
+
+.hotel-room-card__price-sub {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Oda seç butonu */
+.hotel-room-select-btn {
+  background-color: #0057A8;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+.hotel-room-select-btn:hover { background-color: #004489; }
+
+/* Tesis özelliği chip */
+.hotel-feature-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f9fafb;
+  border: 1px solid #f3f4f6;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  color: #374151;
+}
+.hotel-feature-chip svg { color: #0057A8; flex-shrink: 0; }
+
+/* ──────────────────────────────────────────────────────────
+   FİYAT TABLOSU
+────────────────────────────────────────────────────────── */
+.hotel-price-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.hotel-price-table th {
+  background-color: #f9fafb;
+  color: #6b7280;
+  font-weight: 600;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+.hotel-price-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+}
+.hotel-price-table td:last-child {
+  font-weight: 700;
+  color: #E31E24;
+}
+.hotel-price-table tr:last-child td { border-bottom: none; }
+
+/* ──────────────────────────────────────────────────────────
+   YORUMLAR BÖLÜMÜ
+────────────────────────────────────────────────────────── */
+/* Büyük puan (yorumlar başlığının yanında) */
+.hotel-review-score {
+  background-color: #0dbac6;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.hotel-review-score__value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hotel-review-score__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Yorum kartı */
+.hotel-review-card {
+  background-color: #f9fafb;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.hotel-review-card__author {
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.875rem;
+}
+
+.hotel-review-card__date {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.hotel-review-card__text {
+  color: #4b5563;
+  font-size: 0.875rem;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+/* ──────────────────────────────────────────────────────────
+   STICKY REZERVASYON SIDEBAR
+────────────────────────────────────────────────────────── */
+.hotel-booking-sidebar {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  padding: 20px;
+  position: sticky;
+  top: 80px;
+}
+
+.hotel-booking-sidebar__price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #E31E24;
+}
+
+.hotel-booking-sidebar__price-sub {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.hotel-booking-sidebar__book-btn {
+  width: 100%;
+  background-color: #E31E24;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  box-shadow: 0 4px 14px rgba(227,30,36,0.30);
+}
+.hotel-booking-sidebar__book-btn:hover { background-color: #BE1920; }

@@ -1,0 +1,396 @@
+/*
+ * ╔══════════════════════════════════════════════════════════════╗
+ * ║          TOURBULANCE — DESIGN TOKENS & STYLE GUIDE          ║
+ * ║     Tüm sayfalar ve bileşenler için merkezi CSS referansı   ║
+ * ╚══════════════════════════════════════════════════════════════╝
+ *
+ *  Oluşturulma : 2026-02-26
+ *  Kapsam      : pages/ + components/ dizinlerindeki tüm .tsx dosyaları
+ *
+ *  İÇİNDEKİLER
+ *  ─────────────────────────────────────────────────────────────
+ *  1. RENK PALETİ
+ *     1.1 Marka Renkleri (Primary)
+ *     1.2 Yardımcı Renkler (Accent / Secondary)
+ *     1.3 Nötr / Gri Tonları
+ *     1.4 Durum Renkleri (Semantic)
+ *  2. TİPOGRAFİ
+ *     2.1 Hero / Page Title (h1)
+ *     2.2 Section Başlığı (h2)
+ *     2.3 Kart / Panel Başlığı (h3)
+ *     2.4 İstatistik / Sayı
+ *     2.5 Gövde Metni (body / p)
+ *     2.6 Etiket / Badge / Chip (span / small)
+ *  3. BUTONLAR
+ *     3.1 Primary (Mavi CTA)
+ *     3.2 Primary Hover (Kırmızıya dönen mavi)
+ *     3.3 Secondary (Outline Mavi)
+ *     3.4 Danger / Action (Kırmızı)
+ *     3.5 Auth Butonu (Modal / Login)
+ *     3.6 Ghost / Metin Butonu
+ *  4. SAYFA BAZLI TİPOGRAFİ HARİTASI
+ *  5. LAYOUT & SPACING
+ *  6. BILEŞEN STİLLERİ
+ *     6.1 Header
+ *     6.2 Footer
+ *     6.3 Breadcrumb
+ *     6.4 TourCard / TourCardGrid
+ *     6.5 Banner (görsel üstü başlık)
+ *     6.6 FilterSidebar
+ *     6.7 SearchBar
+ *     6.8 Modal (Login / Register)
+ */
+
+
+/* ================================================================
+   1. RENK PALETİ
+   ================================================================ */
+
+:root {
+
+  /* 1.1 Marka Renkleri ─────────────────────────────────────── */
+
+  --color-primary:        #0057A8;   /* Çelik Mavi — ana marka rengi              */
+  --color-primary-dark:   #004489;   /* Hover → buton, link                       */
+  --color-primary-darker: #003d7a;   /* Gradient sonu, CTA kutu arka planı        */
+
+  --color-red:            #E31E24;   /* Tourbulance Kırmızı — CTA, fiyat, badge   */
+  --color-red-dark:       #BE1920;   /* Hover → kırmızı butonlar                  */
+  --color-red-darker:     #c01a1f;   /* Footer sosyal medya hover                 */
+
+  /* 1.2 Yardımcı Renkler ──────────────────────────────────── */
+
+  --color-auth:           #3d6b8f;   /* Modal başlık, Login / Register butonu     */
+  --color-auth-dark:      #2d5a7a;   /* Auth buton hover                          */
+
+  --color-teal:           #0dbac6;   /* Otel puan kutusu (rating badge)           */
+
+  --color-breadcrumb:     #0a2463;   /* Breadcrumb aktif link rengi               */
+
+  --color-emerald:        #059669;   /* Vizesiz Turlar bölümü (emerald-600)       */
+  --color-emerald-banner: #064e3b;   /* Vizesiz Turlar banner gradient (emerald-900) */
+
+  /* 1.3 Nötr / Gri Tonları ────────────────────────────────── */
+
+  --color-footer-bg:      #111111;   /* Footer arka plan                          */
+  --color-gray-900:       #111827;   /* En koyu metin                             */
+  --color-gray-800:       #1f2937;   /* İkincil başlık                            */
+  --color-gray-600:       #4b5563;   /* Gövde metin                               */
+  --color-gray-500:       #6b7280;   /* Yardımcı metin, ikon                      */
+  --color-gray-400:       #9ca3af;   /* Placeholder, tarih, süre                  */
+  --color-gray-200:       #e5e7eb;   /* Kenarlık (border)                         */
+  --color-gray-100:       #f3f4f6;   /* Kart arka plan, chip bg                  */
+  --color-gray-50:        #f9fafb;   /* Sayfa genel arka plan                    */
+  --color-white:          #ffffff;
+
+  /* 1.4 Durum Renkleri ────────────────────────────────────── */
+
+  --color-success:        #059669;   /* Onay, dahil hizmet ikonu                  */
+  --color-warning:        #f59e0b;   /* Yıldız / puan rengi                       */
+  --color-danger:         #E31E24;   /* Hata, kaldırılan hizmet                   */
+  --color-info:           #0057A8;   /* Bilgi kutusu kenarlığı                    */
+}
+
+
+/* ================================================================
+   2. TİPOGRAFİ
+   ================================================================ */
+
+/*
+ * TEMEL KURAL:
+ *  • font-size   → clamp(min, viewport, max) veya sabit rem
+ *  • font-weight → 700 = section/kart başlığı | 800 = hero/banner
+ *  • Tailwind class kullanılmaz; değerler inline style={ } ile verilir
+ */
+
+/* 2.1 Hero / Page Title (h1) ────────────────────────────────
+ *
+ *  Kullanım yeri          │ font-size                        │ weight │ renk
+ *  ───────────────────────┼──────────────────────────────────┼────────┼──────────────
+ *  HomePage hero slider   │ clamp(2.5rem, 6vw,  4.5rem)      │  800   │ #ffffff
+ *  BlogListPage hero      │ clamp(2rem,   5vw,  3rem)        │  800   │ #ffffff
+ *  ContactPage hero       │ clamp(2rem,   5vw,  3rem)        │  800   │ #ffffff
+ *  AboutPage hero         │ clamp(2rem,   5vw,  3.5rem)      │  800   │ #ffffff
+ *  PrivacyPage hero       │ clamp(1.8rem, 4vw,  2.8rem)      │  800   │ #ffffff
+ *  ReservationPage        │ clamp(1.8rem, 4vw,  2.5rem)      │  800   │ #111827
+ *  BlogDetailPage hero    │ clamp(1.4rem, 4vw,  2.5rem)      │  800   │ #ffffff
+ *  HotelDetailPage        │ clamp(1.4rem, 3vw,  2rem)        │  800   │ #111827
+ *  HotelCategoryPage      │ clamp(1.5rem, 3vw,  2.2rem)      │  800   │ #111827
+ */
+
+/* 2.2 Section Başlığı (h2) ──────────────────────────────────
+ *
+ *  Kullanım yeri                  │ font-size                       │ weight │ renk
+ *  ───────────────────────────────┼─────────────────────────────────┼────────┼──────────
+ *  HomePage beyaz bg bölüm h2     │ clamp(1.5rem, 3vw, 2rem)        │  700   │ #111827
+ *  HomePage SSS, Blog h2          │ clamp(1.5rem, 3vw, 2rem)        │  700   │ #111827
+ *  HomePage CTA büyük h2          │ clamp(1.8rem, 4vw, 3rem)        │  800   │ #ffffff
+ *  HomePage banner h2 (üst görsel)│ clamp(1.6rem, 4vw, 2.5rem)      │  800   │ #ffffff
+ *  AboutPage hikaye h2            │ clamp(1.4rem, 3vw, 2rem)        │  700   │ #111827
+ *  AllToursPage kategori h2       │ clamp(1.2rem, 2.5vw, 1.6rem)    │  700   │ #111827
+ *  AllToursPage slider h2         │ clamp(1rem,   2vw,  1.25rem)    │  700   │ #111827
+ *  BlogListPage öne çıkan h2      │ clamp(1.1rem, 2vw,  1.5rem)     │  700   │ #111827 → #0057A8 (hover)
+ *  BlogDetailPage içerik h2 (##)  │ 1.25rem (sabit)                 │  700   │ #111827
+ *  ContactPage form kartı h2      │ 1.2rem  (sabit)                 │  700   │ #111827
+ *  ReservationPage adım h2        │ 1.2rem  (sabit)                 │  bold  │ #111827
+ *  HotelDetailPage kart h2        │ 1.15rem (sabit)                 │  bold  │ #111827
+ *  AllHotelsPage liste h2         │ 1.15rem (sabit)                 │  bold  │ #111827
+ */
+
+/* 2.3 Kart / Panel Başlığı (h3) ────────────────────────────
+ *
+ *  Kullanım yeri                  │ font-size         │ weight │ renk
+ *  ───────────────────────────────┼───────────────────┼────────┼──────────────
+ *  AboutPage / AllToursPage CTA   │ 1.3rem  (sabit)   │  700   │ #ffffff
+ *  AllHotelsPage otel adı         │ 1.1rem  (sabit)   │  bold  │ #111827 → #0057A8 (hover)
+ *  TourCard otel adı              │ base (Tailwind)   │  semi  │ #111827 → #0057A8 (hover)
+ *  TourCardGrid otel adı          │ sm  (Tailwind)    │  semi  │ #111827 → #0057A8 (hover)
+ */
+
+/* 2.4 İstatistik / Sayı ────────────────────────────────────
+ *
+ *  Kullanım yeri                  │ font-size    │ weight │ renk
+ *  ───────────────────────────────┼──────────────┼────────┼──────────────────
+ *  AboutPage stats değer          │ 1.75rem      │  800   │ #111827
+ *  AboutPage rozet (15 yıl vb.)   │ 1.5rem       │  bold  │ #0057A8 / #ffffff
+ *  HotelDetailPage puan kutusu    │ 2rem         │  bold  │ #ffffff (on teal)
+ *  HotelDetailPage yorum puanı    │ 2.5rem       │  bold  │ #ffffff (lineHeight: 1)
+ *  HotelCategoryPage puan badge   │ 1.3rem       │  bold  │ #ffffff
+ *  AllHotelsPage fiyat            │ 1.2rem       │  bold  │ #E31E24
+ */
+
+/* 2.5 Gövde Metni ──────────────────────────────────────────
+ *
+ *  Sınıf               │ Tailwind karşılığı │ Kullanım
+ *  ────────────────────┼────────────────────┼────────────────────────────
+ *  Standart gövde      │ text-sm            │ Kart açıklaması, paragraf
+ *  Yardımcı / meta     │ text-xs            │ Tarih, süre, etiket
+ *  Küçük açıklama      │ text-[11px]        │ Blog yan panel okuma süresi
+ */
+
+/* 2.6 Etiket / Badge / Chip ────────────────────────────────
+ *
+ *  Tip                     │ Tailwind sınıfı
+ *  ────────────────────────┼────────────────────────────────────────────────────────
+ *  Kırmızı kategori üst    │ text-[#E31E24] text-sm font-semibold uppercase tracking-wider
+ *  Mavi kategori üst       │ text-[#0057A8] text-sm font-semibold uppercase tracking-wider
+ *  Yeşil (vizesiz)         │ text-emerald-600 text-sm font-semibold uppercase tracking-wider
+ *  Gri kategori üst        │ text-gray-500 text-xs font-semibold uppercase tracking-wider
+ *  Mavi bilgi chip         │ text-xs text-[#0057A8] bg-blue-50 px-3 py-1.5 rounded-lg
+ *  Gri tag chip            │ text-xs bg-gray-100 text-gray-600 px-3 py-1.5 rounded-full
+ *  Banner kategori etiketi │ inline-block bg-[#0057A8] text-white text-xs font-semibold px-3 py-1.5 rounded-lg
+ */
+
+
+/* ================================================================
+   3. BUTONLAR
+   ================================================================ */
+
+/*
+ *  3.1 Primary — Mavi CTA
+ *  ─────────────────────────────────────────────────────────────
+ *  bg-[#0057A8] hover:bg-[#004489] text-white
+ *  px-4 py-2.5 rounded-xl text-sm font-medium
+ *  shadow-md shadow-blue-200 hover:shadow-blue-300
+ *  transition-all
+ *
+ *  Kullanım: TourCard "İncele", SearchBar "Tur Ara",
+ *            Header mobile "Turları Gör"
+ *
+ *  3.2 Primary → Kırmızı Hover (TourCardGrid CTA)
+ *  ─────────────────────────────────────────────────────────────
+ *  bg-[#0057A8] hover:bg-[#E31E24] text-white
+ *  px-3 py-2 rounded-xl text-xs font-semibold
+ *  shadow-md transition-all whitespace-nowrap
+ *
+ *  Kullanım: TourCardGrid "Detay" butonu
+ *
+ *  3.3 Secondary — Outline Mavi
+ *  ─────────────────────────────────────────────────────────────
+ *  border border-[#0057A8] text-[#0057A8]
+ *  hover:bg-[#0057A8] hover:text-white
+ *  px-4 py-2 rounded-lg text-sm
+ *  transition-all
+ *
+ *  Kullanım: Header "Giriş Yap", TourList "Daha Fazla Yükle"
+ *
+ *  3.4 Danger — Kırmızı CTA
+ *  ─────────────────────────────────────────────────────────────
+ *  bg-[#E31E24] hover:bg-[#BE1920] text-white
+ *  py-3 rounded-xl text-sm font-medium
+ *  shadow-md shadow-red-200 hover:shadow-red-300
+ *  transition-all
+ *
+ *  Kullanım: FilterSidebar "Filtrele & Ara",
+ *            Root scroll-top butonu,
+ *            Banner "Tüm Turları Gör"
+ *
+ *  3.5 Auth — Slate Mavi (Modal)
+ *  ─────────────────────────────────────────────────────────────
+ *  bg-[#3d6b8f] hover:bg-[#2d5a7a] text-white
+ *  font-bold py-3.5 rounded-lg
+ *  tracking-widest text-sm
+ *  transition-colors
+ *
+ *  Kullanım: LoginModal "Giriş Yap", RegisterModal "Kayıt Ol"
+ *
+ *  3.6 Ghost / Metin Butonu
+ *  ─────────────────────────────────────────────────────────────
+ *  text-[#0057A8] text-sm font-medium hover:text-[#E31E24]
+ *  flex items-center gap-1.5 transition-colors
+ *
+ *  Kullanım: Section "Tümünü Gör", Breadcrumb linkleri,
+ *            Prev/Next blog navigasyon
+ */
+
+
+/* ================================================================
+   4. SAYFA BAZLI TİPOGRAFİ HARİTASI (özet tablo)
+   ================================================================
+
+   SAYFA                │ h1 font-size                    │ h1 weight │ h2 font-size                 │ h2 weight │ H1 renk
+   ─────────��───────────┼─────────────────────────────────┼───────────┼──────────────────────────────┼───────────┼─────────────
+   HomePage             │ clamp(2.5rem, 6vw, 4.5rem)      │    800    │ clamp(1.5rem, 3vw, 2rem)     │    700    │ #ffffff (slider)
+   AllToursPage         │ —                               │     —     │ clamp(1.2rem, 2.5vw, 1.6rem) │    700    │ #111827
+   TourDetailPage       │ —  (TourCard içi)               │     —     │ 1.15rem                      │    bold   │ #111827
+   BlogListPage         │ clamp(2rem, 5vw, 3rem)          │    800    │ clamp(1.1rem, 2vw, 1.5rem)   │    700    │ #ffffff
+   BlogDetailPage       │ clamp(1.4rem, 4vw, 2.5rem)      │    800    │ 1.25rem (içerik ##)          │    700    │ #ffffff
+   ContactPage          │ clamp(2rem, 5vw, 3rem)          │    800    │ 1.2rem                       │    700    │ #ffffff
+   AboutPage            │ clamp(2rem, 5vw, 3.5rem)        │    800    │ clamp(1.4rem, 3vw, 2rem)     │    700    │ #ffffff
+   PrivacyPage          │ clamp(1.8rem, 4vw, 2.8rem)      │    800    │ 1rem                         │  semibold │ #ffffff
+   ReservationPage      │ clamp(1.8rem, 4vw, 2.5rem)      │    800    │ 1.2rem                       │    bold   │ #111827
+   AllHotelsPage        │ —                               │     —     │ 1.15rem                      │    bold   │ #111827
+   HotelDetailPage      │ clamp(1.4rem, 3vw, 2rem)        │    800    │ 1.15rem                      │    bold   │ #111827
+   HotelCategoryPage    │ clamp(1.5rem, 3vw, 2.2rem)      │    800    │ —                            │     —     │ #111827
+
+*/
+
+
+/* ================================================================
+   5. LAYOUT & SPACING
+   ================================================================ */
+
+/*
+ *  Container genişlikleri:
+ *  ─────────────────────────────────────────────────────────────
+ *  max-w-7xl mx-auto px-4   → Genel sayfa içeriği (HomePage, AllToursPage)
+ *  max-w-6xl mx-auto px-4   → Blog içeriği (BlogDetailPage)
+ *  max-w-5xl mx-auto px-4   → Dar içerik (PrivacyPage, ContactPage)
+ *
+ *  Section dikey boşlukları:
+ *  ─────────────────────────────────────────────────────────────
+ *  py-16   → Standart section padding (çoğu bölüm)
+ *  py-12   → Kompakt section
+ *  py-8    → Sayfa iç içerik başlangıcı (BlogDetailPage, ContactPage)
+ *
+ *  Grid şablonları:
+ *  ─────────────────────────────────────────────────────────────
+ *  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5    → TourCardGrid, Vizesiz
+ *  grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5    → Featured turlar (HomPage)
+ *  grid-cols-1 lg:grid-cols-[1fr_300px] gap-10        → BlogDetailPage içerik + sidebar
+ *  grid-cols-1 lg:grid-cols-[280px_1fr] gap-6         → AllToursPage filtre + liste
+ *
+ *  Hero yükseklikleri:
+ *  ─────────────────────────────────────────────────────────────
+ *  h-[480px] md:h-[600px]   → Ana sayfa hero slider
+ *  h-72 md:h-[420px]        → BlogDetailPage hero
+ *  h-52 md:h-[300px]        → AllToursPage / BlogListPage hero
+ *  h-52 md:h-64             → Section banner (Balkan, Avrupa, Vizesiz, Oteller)
+ *
+ *  Border radius:
+ *  ─────────────────────────────────────────────────────────────
+ *  rounded-xl    → Chip, badge, küçük buton
+ *  rounded-2xl   → Kart (TourCard, TourCardGrid, HotelCard)
+ *  rounded-3xl   → Section banner görseli
+ */
+
+
+/* ================================================================
+   6. BILEŞEN STİLLERİ
+   ================================================================ */
+
+/* 6.1 Header ───────────────────────────────────────────────
+ *
+ *  Üst bilgi şeridi : bg-[#0057A8] text-white py-1.5 px-4
+ *  Ana header bg    : bg-white shadow-sm (sticky top-0 z-50)
+ *  Nav link normal  : text-gray-700 hover:text-[#E31E24] hover:bg-red-50
+ *  Nav link aktif   : text-[#0057A8] bg-blue-50
+ *  Dropdown item    : text-gray-600 hover:bg-red-50 hover:text-[#E31E24]
+ *  Mega menü border : border-t-2 border-[#0057A8]
+ *  "Giriş Yap"      : border border-[#0057A8] text-[#0057A8] hover:bg-[#0057A8] hover:text-white
+ *  "Kayıt Ol"       : bg-[#E31E24] hover:bg-[#BE1920] text-white
+ */
+
+/* 6.2 Footer ───────────────────────────────────────────────
+ *
+ *  Arka plan        : bg-[#111111] text-white mt-16
+ *  Sosyal medya ikon: w-9 h-9 rounded-full bg-[#E31E24] hover:bg-[#c01a1f]
+ *  Marka adı vurgu  : text-[#E31E24] font-semibold
+ */
+
+/* 6.3 Breadcrumb ───────���───────────────────────────────────
+ *
+ *  Link rengi   : text-gray-500 hover:text-[#0a2463]
+ *  Aktif sayfa  : text-[#0a2463] font-medium
+ *  Ayırıcı ikon : ChevronRight size={12} text-gray-400
+ */
+
+/* 6.4 TourCard / TourCardGrid ──────────────────────────────
+ *
+ *  Kart container  : bg-white rounded-2xl overflow-hidden shadow-sm
+ *                    hover:shadow-xl border border-gray-100 transition-all
+ *  Başlık hover    : group-hover:text-[#0057A8] transition-colors
+ *  Fiyat rengi     : text-[#E31E24]
+ *  Fiyat ağırlık   : TourCard → text-2xl font-bold | TourCardGrid → text-xl font-bold
+ *  Özellik ikon    : text-[#0057A8] size={10-13}
+ *  Bilgi chip      : text-xs text-[#0057A8] bg-blue-50 px-2.5 py-1.5 rounded-lg
+ *  Badge rengi     : tour.badgeColor || "#E31E24" (dinamik)
+ *  CTA butonu      : bkz. Buton 3.1 / 3.2
+ */
+
+/* 6.5 Banner (görsel üstü başlık) ──────────────────────────
+ *
+ *  Kap             : relative h-52 md:h-64 rounded-3xl overflow-hidden mb-10 shadow-xl
+ *  Img             : w-full h-full object-cover
+ *
+ *  Gradient türleri (sayfaya göre):
+ *  ─────────────────────────────────────────────────────────
+ *  Balkan Turları  : from-[#0057A8]/90 via-[#0057A8]/60 to-transparent (mavi)
+ *  Vizesiz Turlar  : from-emerald-900/90 via-emerald-800/55 to-transparent (koyu yeşil)
+ *  Avrupa Turları  : from-black/80 via-black/50 to-transparent (koyu gri)
+ *  Öne Çık. Oteller: from-[#0057A8]/90 via-[#0057A8]/55 to-transparent (mavi)
+ *
+ *  İçerik padding  : absolute inset-0 flex flex-col justify-center pl-8 md:pl-14
+ *  Küçük etiket    : text-white/80 text-sm font-medium mb-2
+ *  h2              : text-white mb-3 | clamp(1.6rem, 4vw, 2.5rem) | weight 800
+ *  Açıklama p      : text-white/80 text-sm max-w-sm mb-5
+ *  CTA butonu      : bg-[#E31E24] hover:bg-white hover:text-[#E31E24]
+ *                    inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm w-fit
+ */
+
+/* 6.6 FilterSidebar ────────────────────────────────────────
+ *
+ *  Başlık bar      : bg-[#0057A8] px-5 py-4 text-white
+ *  Input focus     : focus:border-[#0057A8]
+ *  Checkbox aktif  : bg-[#0057A8] border-[#0057A8]
+ *  Checkbox hover  : group-hover:border-[#0057A8]
+ *  "Filtrele" btn  : w-full bg-[#E31E24] hover:bg-[#BE1920] text-white
+ *                    py-3 rounded-xl text-sm font-medium shadow-md shadow-red-200
+ */
+
+/* 6.7 SearchBar ─────────────────────────────────────────────
+ *
+ *  Arka plan       : bg-[#0057A8] py-8 px-4
+ *  Input ikon      : text-[#0057A8]
+ *  "Tur Ara" butonu: bg-[#0057A8] hover:bg-[#004489] text-white
+ *                    px-8 py-4 font-semibold text-sm
+ */
+
+/* 6.8 LoginModal / RegisterModal ────────────────────────────
+ *
+ *  Modal başlık    : bg-[#3d6b8f] px-6 py-4 text-white
+ *  Checkbox aktif  : bg-[#3d6b8f] border-[#3d6b8f]
+ *  Submit butonu   : bg-[#3d6b8f] hover:bg-[#2d5a7a] text-white
+ *                    font-bold py-3.5 rounded-lg tracking-widest text-sm
+ *  Link / metin    : text-[#3d6b8f] font-semibold hover:underline
+ */

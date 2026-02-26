@@ -1,0 +1,317 @@
+/*
+ * ═══════════════════════════════════════════════════════════
+ *  TOURBULANCE — ReservationPage  (/src/app/pages/ReservationPage.tsx)
+ * ═══════════════════════════════════════════════════════════
+ */
+
+/* ──────────────────────────────────────────────────────────
+   SAYFA GENEL
+────────────────────────────────────────────────────────── */
+.page-reservation {
+  background-color: #f9fafb;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   ÜST BAR
+────────────────────────────────────────────────────────── */
+.reservation-top-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   SAYFA BAŞLIĞI
+────────────────────────────────────────────────────────── */
+.reservation-h1 {
+  color: #111827;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   ADIM ÇUBUĞU (StepBar)
+────────────────────────────────────────────────────────── */
+.step-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Adım dairesi — tamamlandı */
+.step-circle--done {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background-color: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* Adım dairesi — aktif */
+.step-circle--active {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background-color: #0057A8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  box-shadow: 0 0 0 4px rgba(0,87,168,0.15);
+}
+
+/* Adım dairesi — pasif */
+.step-circle--passive {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background-color: #f3f4f6;
+  border: 2px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.step-label--active  { font-size: 0.75rem; color: #0057A8; font-weight: 600; }
+.step-label--passive { font-size: 0.75rem; color: #9ca3af; }
+
+.step-connector {
+  flex: 1;
+  height: 2px;
+  background-color: #e5e7eb;
+  max-width: 48px;
+  margin-bottom: 16px;
+}
+.step-connector--done { background-color: #059669; }
+
+/* ──────────────────────────────────────────────────────────
+   FORM KARTI
+────────────────────────────────────────────────────────── */
+.reservation-form-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 24px;
+}
+@media (min-width: 768px) {
+  .reservation-form-card { padding: 32px; }
+}
+
+.reservation-form-card__h2 {
+  color: #111827;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.reservation-form-card__step-label {
+  color: #0057A8;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+/* Form input (mavi-yeşil focus: #0dbac6 — ReservationPage özgün) */
+.reservation-input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.875rem;
+  color: #374151;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.reservation-input:focus { border-color: #0dbac6; }
+.reservation-input::placeholder { color: #9ca3af; }
+
+/* Form label */
+.reservation-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+/* İleri butonu */
+.reservation-next-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #0057A8;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.reservation-next-btn:hover { background-color: #004489; }
+
+/* Geri butonu */
+.reservation-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 0.875rem;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.reservation-back-btn:hover {
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+/* ──────────────────────────────────────────────────────────
+   STICKY ÖZET SIDEBAR
+────────────────────────────────────────────────────────── */
+.reservation-summary {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 20px;
+  position: sticky;
+  top: 80px;
+}
+
+.reservation-summary__title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #111827;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  margin-bottom: 16px;
+}
+
+.reservation-summary__row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-bottom: 8px;
+}
+
+.reservation-summary__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #f3f4f6;
+  margin-top: 12px;
+}
+
+.reservation-summary__total-label {
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.875rem;
+}
+
+.reservation-summary__total-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #E31E24;
+}
+
+/* ──────────────────────────────────────────────────────────
+   TAMAMLANDI EKRANI
+────────────────────────────────────────────────────────── */
+.reservation-success {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.10);
+  border: 1px solid #f3f4f6;
+  padding: 40px;
+  max-width: 28rem;
+  text-align: center;
+}
+
+.reservation-success__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 9999px;
+  background-color: #ecfdf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+.reservation-success__icon svg { color: #10b981; }
+
+.reservation-success__h2 {
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.reservation-success__desc {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.reservation-success__ref {
+  color: #9ca3af;
+  font-size: 0.75rem;
+  margin-bottom: 24px;
+}
+
+/* Amber uyarı kutusu */
+.reservation-success__warning {
+  background-color: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  color: #b45309;
+  margin-bottom: 24px;
+}
+
+/* Ana sayfaya dön butonu */
+.reservation-home-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #0057A8;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+.reservation-home-btn:hover { background-color: #004489; }

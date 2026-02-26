@@ -1,0 +1,134 @@
+/*
+ * ╔══════════════════════════════════════════════════════════════════╗
+ * ║      TOURBULANCE — SAYFA BAZLI CSS DESIGN TOKEN SİSTEMİ        ║
+ * ║             Tüm token dosyalarının tek giriş noktası            ║
+ * ╚══════════════════════════════════════════════════════════════════╝
+ *
+ *  Oluşturulma : 2026-02-26
+ *  Kaynak      : /src/app/pages/ + /src/app/components/
+ *
+ *  DOSYA YAPISI
+ *  ─────────────────────────────────────────────────────────────────
+ *  00-index.css          ← bu dosya (özet tablo + @import listesi)
+ *  01-homepage.css       ← HomePage
+ *  02-blog-list.css      ← BlogListPage
+ *  03-blog-detail.css    ← BlogDetailPage
+ *  04-contact.css        ← ContactPage
+ *  05-about.css          ← AboutPage
+ *  06-privacy.css        ← PrivacyPage
+ *  07-reservation.css    ← ReservationPage (4 adımlı wizard)
+ *  08-hotel-detail.css   ← HotelDetailPage
+ *  09-all-tours.css      ← AllToursPage
+ *  10-components.css     ← Paylaşılan bileşenler
+ *                           (Header, Footer, Breadcrumb, TourCard,
+ *                            TourCardGrid, FilterSidebar, SearchBar,
+ *                            LoginModal, RegisterModal, ScrollTop)
+ *
+ * ══════════════════════════════════════════════════════════════════
+ *  GLOBAL RENK PALETİ (CSS Custom Properties)
+ * ══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Marka ─────────────────────────────────── */
+  --c-blue:          #0057A8;   /* Çelik mavi — ana marka           */
+  --c-blue-dark:     #004489;   /* Hover (buton, link)              */
+  --c-blue-darker:   #003d7a;   /* Gradient sonu, CTA arka planı    */
+
+  --c-red:           #E31E24;   /* Tourbulance kırmızı — CTA, fiyat */
+  --c-red-dark:      #BE1920;   /* Hover (kırmızı buton)            */
+  --c-red-darker:    #c01a1f;   /* Footer sosyal hover              */
+
+  /* ── Yardımcı ──────────────────────────────── */
+  --c-auth:          #3d6b8f;   /* Login / Register modal           */
+  --c-auth-dark:     #2d5a7a;   /* Auth modal hover                 */
+  --c-teal:          #0dbac6;   /* Otel puan kutusu                 */
+  --c-breadcrumb:    #0a2463;   /* Breadcrumb aktif link            */
+
+  /* ── Nötr ──────────────────────────────────── */
+  --c-footer-bg:     #111111;
+  --c-gray-900:      #111827;
+  --c-gray-700:      #374151;
+  --c-gray-600:      #4b5563;
+  --c-gray-500:      #6b7280;
+  --c-gray-400:      #9ca3af;
+  --c-gray-200:      #e5e7eb;
+  --c-gray-100:      #f3f4f6;
+  --c-gray-50:       #f9fafb;
+  --c-white:         #ffffff;
+
+  /* ── Durum ─────────────────────────────────── */
+  --c-success:       #059669;   /* Dahil hizmet, onay ikonu         */
+  --c-warning:       #f59e0b;   /* Yıldız, puan                     */
+  --c-amber:         #b45309;   /* Uyarı metni (KVKK, rezervasyon)  */
+}
+
+/*
+ * ══════════════════════════════════════════════════════════════════
+ *  TİPOGRAFİ ÖZETİ (tüm sayfalardaki gerçek CSS değerleri)
+ * ══════════════════════════════════════════════════════════════════
+ *
+ *  ELEMENT            SAYFA                    font-size                       weight   renk
+ *  ─────────────────────────────────────────────────────────────────────────────────────────────
+ *  h1 (hero)          HomePage slider          clamp(2.5rem, 6vw, 4.5rem)      800      #ffffff
+ *  h1 (hero)          BlogListPage             clamp(2rem, 5vw, 3rem)          800      #ffffff
+ *  h1 (hero)          ContactPage              clamp(2rem, 5vw, 3rem)          800      #ffffff
+ *  h1 (hero)          AboutPage                clamp(2rem, 5vw, 3.5rem)        800      #ffffff
+ *  h1 (hero)          PrivacyPage              clamp(1.8rem, 4vw, 2.8rem)      800      #ffffff
+ *  h1 (page)          ReservationPage          clamp(1.8rem, 4vw, 2.5rem)      800      #111827
+ *  h1 (hero)          BlogDetailPage           clamp(1.4rem, 4vw, 2.5rem)      800      #ffffff
+ *  h1 (card)          HotelDetailPage          clamp(1.4rem, 3vw, 2rem)        800      #111827
+ *  h1 (page)          HotelCategoryPage        clamp(1.5rem, 3vw, 2.2rem)      800      #111827
+ *
+ *  h2 (section)       HomePage beyaz bg        clamp(1.5rem, 3vw, 2rem)        700      #111827
+ *  h2 (CTA büyük)     HomePage                 clamp(1.8rem, 4vw, 3rem)        800      #ffffff
+ *  h2 (banner)        HomePage (görselli)      clamp(1.6rem, 4vw, 2.5rem)      800      #ffffff
+ *  h2 (section)       AboutPage                clamp(1.4rem, 3vw, 2rem)        700      #111827
+ *  h2 (section)       AllToursPage             clamp(1.2rem, 2.5vw, 1.6rem)    700      #111827
+ *  h2 (slider)        AllToursPage             clamp(1rem, 2vw, 1.25rem)       700      #111827
+ *  h2 (öne çıkan)     BlogListPage             clamp(1.1rem, 2vw, 1.5rem)      700      #111827
+ *  h2 (içerik ##)     BlogDetailPage           1.25rem (sabit)                 700      #111827
+ *  h2 (form)          ContactPage              1.2rem (sabit)                  700      #111827
+ *  h2 (form)          ReservationPage          1.2rem (sabit)                  700      #111827
+ *  h2 (tamamlandı)    ReservationPage          1.5rem (sabit)                  700      #111827
+ *  h2 (kart)          HotelDetailPage          1.15rem (sabit)                 700      #111827
+ *  h2 (liste)         AllHotelsPage            1.15rem (sabit)                 700      #111827
+ *
+ *  h3 (CTA)           AboutPage / AllToursPage 1.3rem (sabit)                  700      #ffffff
+ *  h3 (otel adı)      AllHotelsPage            1.1rem (sabit)                  700      #111827
+ *  h3 (sidebar)       BlogDetailPage           0.875rem (sabit)                600      #1f2937
+ *
+ *  Stat sayısı        AboutPage                1.75rem                         800      #111827
+ *  Rozet sayısı       AboutPage (sol alt)      1.5rem                          700      #0057A8
+ *  Rozet sayısı       AboutPage (sağ üst)      1.5rem                          700      #ffffff
+ *  Puan kutusu        HotelDetailPage          2rem                            700      #ffffff (teal bg)
+ *  Yorum puanı        HotelDetailPage          2.5rem                          700      #ffffff (lineHeight:1)
+ *  Rating badge       HotelCategoryPage        1.3rem                          700      #ffffff
+ *  Fiyat              AllHotelsPage            1.2rem                          700      #E31E24
+ *
+ * ══════════════════════════════════════════════════════════════════
+ *  BUTON PALETİ ÖZETİ
+ * ══════════════════════════════════════════════════════════════════
+ *
+ *  TİP                          bg          hover bg     renk     sayfalar
+ *  ─────────────────────────────────────────────────────────────────────────
+ *  Primary (mavi)               #0057A8     #004489      #fff     TourCard, SearchBar, ContactPage form
+ *  Primary → Red hover          #0057A8     #E31E24      #fff     TourCardGrid CTA
+ *  Secondary outline (mavi)     transparent #0057A8      #0057A8  Header "Giriş Yap", TourList "Daha Fazla"
+ *  Danger (kırmızı)             #E31E24     #BE1920      #fff     FilterSidebar, Root scroll-top
+ *  Hero CTA                     #E31E24     #c01a1f      #fff     HomePage hero, AllToursPage banner
+ *  Auth (slate mavi)            #3d6b8f     #2d5a7a      #fff     LoginModal, RegisterModal
+ *  Ghost metin                  transparent —            #0057A8  "Tümünü Gör", nav linkleri
+ *  Ghost metin hover                        —            #E31E24
+ */
+
+/* ═══ @import listesi ══════════════════════════════════════════ */
+@import "./01-homepage.css";
+@import "./02-blog-list.css";
+@import "./03-blog-detail.css";
+@import "./04-contact.css";
+@import "./05-about.css";
+@import "./06-privacy.css";
+@import "./07-reservation.css";
+@import "./08-hotel-detail.css";
+@import "./09-all-tours.css";
+@import "./10-components.css";

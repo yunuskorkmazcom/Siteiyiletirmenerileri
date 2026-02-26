@@ -1,0 +1,327 @@
+/*
+ * ═══════════════════════════════════════════════════════════
+ *  TOURBULANCE — AboutPage  (/src/app/pages/AboutPage.tsx)
+ * ═══════════════════════════════════════════════════════════
+ */
+
+/* ──────────────────────────────────────────────────────────
+   SAYFA GENEL
+────────────────────────────────────────────────────────── */
+.page-about {
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HERO
+────────────────────────────────────────────────────────── */
+.about-hero {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+}
+
+.about-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,87,168,0.90), rgba(0,87,168,0.50));
+}
+
+.about-hero__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 32px;
+  max-width: 56rem;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.about-hero__eyebrow {
+  color: rgba(255,255,255,0.70);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.about-hero__h1 {
+  color: #ffffff;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.about-hero__desc {
+  color: rgba(255,255,255,0.80);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  max-width: 32rem;
+}
+
+/* ──────────────────────────────────────────────────────────
+   İSTATİSTİK KARTLARI
+────────────────────────────────────────────────────────── */
+.about-stat-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 24px;
+  text-align: center;
+}
+
+.about-stat-card__icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: #eff6ff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.about-stat-card__icon-box svg { color: #0057A8; }
+
+/* Stat sayısal değer */
+.about-stat-card__value {
+  color: #111827;
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.about-stat-card__label {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HİKAYEMİZ BÖLÜMÜ
+────────────────────────────────────────────────────────── */
+.about-story__eyebrow {
+  color: #E31E24;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.about-story__h2 {
+  color: #111827;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.about-story__body {
+  color: #4b5563;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+/* Özellik listesi satırı */
+.about-feature-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.about-feature-row__icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background-color: #d1fae5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.about-feature-row__icon svg { color: #059669; }
+
+.about-feature-row__text {
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+/* Görsel üstü rozet — "15 Yıl" (sol alt) */
+.about-badge-left {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  padding: 16px;
+  border: 1px solid #f3f4f6;
+}
+
+.about-badge-left__value {
+  color: #0057A8;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.about-badge-left__label {
+  color: #6b7280;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+/* Görsel üstü rozet — "%97" (sağ üst) */
+.about-badge-right {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-color: #E31E24;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(227,30,36,0.25);
+  padding: 16px;
+  color: #ffffff;
+}
+
+.about-badge-right__value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.about-badge-right__label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.80);
+  line-height: 1.4;
+}
+
+/* ──────────────────────────────────────────────────────────
+   TÜRSAB KARTI
+────────────────────────────────────────────────────────── */
+.tursab-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  padding: 32px;
+}
+
+.tursab-card__shield {
+  width: 80px;
+  height: 80px;
+  border-radius: 16px;
+  background-color: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tursab-card__shield svg { color: #0057A8; }
+
+.tursab-card__title {
+  font-weight: 700;
+  color: #111827;
+  font-size: 1.125rem;
+  margin-bottom: 4px;
+}
+
+.tursab-card__desc {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.tursab-card__no {
+  color: #0057A8;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Güven rozet item */
+.trust-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.trust-badge__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #ecfdf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trust-badge__icon svg { color: #059669; }
+
+.trust-badge__label {
+  font-size: 0.625rem;                /* 10px */
+  color: #6b7280;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ──────────────────────────────────────────────────────────
+   CTA BÖLÜMÜ
+────────────────────────────────────────────────────────── */
+.about-cta {
+  background: linear-gradient(to right, #0057A8, #003d7a);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 20px 40px rgba(0,87,168,0.20);
+}
+@media (min-width: 640px) {
+  .about-cta { flex-direction: row; }
+}
+
+.about-cta__h3 {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.about-cta__btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  color: #0057A8;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+.about-cta__btn-white:hover { background-color: #f3f4f6; }
+
+.about-cta__btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+.about-cta__btn-outline:hover { background-color: rgba(255,255,255,0.10); }

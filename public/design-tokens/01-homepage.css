@@ -1,0 +1,492 @@
+/*
+ * ═══════════════════════════════════════════════════════════
+ *  TOURBULANCE — HomePage  (/src/app/pages/HomePage.tsx)
+ * ═══════════════════════════════════════════════════════════
+ */
+
+/* ──────────────────────────────────────────────────────────
+   SAYFA GENEL
+────────────────────────────────────────────────────────── */
+.page-home {
+  background-color: #f9fafb;          /* bg-gray-50 */
+}
+
+/* ──────────────────────────────────────────────────────────
+   1. HERO SLIDER
+────────────────────────────────────────────────────────── */
+.hero-slider {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .hero-slider { height: 540px; }
+}
+
+/* Gradient overlay */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.60), rgba(0,0,0,0.30), rgba(0,0,0,0.70));
+}
+
+/* Slide tag etiketi */
+.hero-tag {
+  display: inline-block;
+  background-color: rgba(255,255,255,0.20);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.30);
+  color: #ffffff;
+  font-size: 0.875rem;                /* 14px */
+  padding: 6px 16px;
+  border-radius: 9999px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+/* Hero H1 */
+.hero-h1 {
+  color: #ffffff;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: pre-line;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+  margin-bottom: 16px;
+}
+
+/* Hero alt yazı */
+.hero-subtitle {
+  color: rgba(255,255,255,0.80);
+  font-size: 1.125rem;                /* text-lg */
+  margin-bottom: 32px;
+  max-width: 36rem;
+}
+@media (min-width: 768px) {
+  .hero-subtitle { font-size: 1.25rem; } /* text-xl */
+}
+
+/* Hero CTA butonu */
+.hero-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #E31E24;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 10px 25px rgba(227,30,36,0.35);
+  transition: background-color 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+.hero-cta-btn:hover {
+  background-color: #c01a1f;
+  transform: scale(1.05);
+}
+
+/* Slider ok butonları */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255,255,255,0.20);
+  backdrop-filter: blur(4px);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.30);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.slider-arrow:hover { background-color: rgba(255,255,255,0.40); }
+.slider-arrow--prev { left: 16px; }
+.slider-arrow--next { right: 16px; }
+
+/* Slider dot aktif */
+.slider-dot--active {
+  width: 32px;
+  height: 10px;
+  background-color: #ffffff;
+  border-radius: 9999px;
+}
+.slider-dot--passive {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255,255,255,0.50);
+  border-radius: 9999px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   2. SEARCH PANEL (hero'ya bindirilen)
+────────────────────────────────────────────────────────── */
+.search-panel {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+  overflow: hidden;
+  border: 1px solid #f3f4f6;
+}
+
+/* Tab aktif */
+.search-tab--active {
+  color: #0057A8;
+  border-bottom: 2px solid #0057A8;
+  background-color: rgba(239,246,255,0.50);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+/* Tab pasif */
+.search-tab--passive {
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.search-tab--passive:hover { color: #374151; }
+
+/* Input */
+.search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  background-color: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: #0057A8; }
+
+/* Ara butonu */
+.search-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #E31E24;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: 0 4px 14px rgba(227,30,36,0.25);
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  width: 100%;
+}
+.search-submit-btn:hover { background-color: #c01a1f; }
+
+/* Popüler chip */
+.popular-chip {
+  font-size: 0.75rem;
+  color: #0057A8;
+  background-color: #eff6ff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.popular-chip:hover {
+  background-color: #fef2f2;
+  color: #E31E24;
+}
+
+/* ──────────────────────────────────────────────────────────
+   3. STATS BAR
+────────────────────────────────────────────────────────── */
+.stats-bar {
+  background-color: #0057A8;
+  padding: 56px 16px 40px;            /* pt-14 pb-10 */
+}
+.stat-value {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.25rem;                 /* text-xl */
+  line-height: 1.2;
+}
+.stat-label {
+  color: rgba(255,255,255,0.70);
+  font-size: 0.875rem;
+}
+.stat-icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ──────────────────────────────────────────────────────────
+   4. KATEGORİLER BÖLÜMÜ
+────────────────────────────────────────────────────────── */
+.section-eyebrow {                     /* Kırmızı küçük üst etiket */
+  color: #E31E24;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.section-h2 {                         /* Standart beyaz bg section başlığı */
+  color: #111827;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+}
+
+.section-link {                        /* "Tümünü Gör" link */
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #0057A8;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.section-link:hover { color: #E31E24; }
+
+/* Kategori kart */
+.category-card {
+  position: relative;
+  height: 160px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.category-card:hover {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.20);
+  transform: translateY(-4px);
+}
+.category-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.70), rgba(0,0,0,0.20), transparent);
+}
+.category-card__label {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}
+
+/* ──────────────────────────────────────────────────────────
+   5. BANNER BÖLÜMLERI (Balkan / Vizesiz / Avrupa / Oteller)
+────────────────────────────────────────────────────────── */
+.banner-section {
+  position: relative;
+  height: 208px;                       /* h-52 */
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+@media (min-width: 768px) {
+  .banner-section { height: 256px; }  /* md:h-64 */
+}
+
+/* Gradient türleri */
+.banner-section--blue .banner-overlay {
+  background: linear-gradient(to right, rgba(0,87,168,0.90), rgba(0,87,168,0.60), transparent);
+}
+.banner-section--green .banner-overlay {
+  background: linear-gradient(to right, rgba(6,78,59,0.90), rgba(6,78,59,0.55), transparent);
+}
+.banner-section--dark .banner-overlay {
+  background: linear-gradient(to right, rgba(0,0,0,0.80), rgba(0,0,0,0.50), transparent);
+}
+
+.banner-eyebrow {
+  color: rgba(255,255,255,0.80);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.banner-h2 {
+  color: #ffffff;
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.banner-desc {
+  color: rgba(255,255,255,0.80);
+  font-size: 0.875rem;
+  max-width: 24rem;
+  margin-bottom: 20px;
+}
+
+.banner-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #E31E24;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background-color 0.2s, color 0.2s;
+  text-decoration: none;
+}
+.banner-cta-btn:hover {
+  background-color: #ffffff;
+  color: #E31E24;
+}
+
+/* ──────────────────────────────────────────────────────────
+   6. CTA BÜYÜK BÖLÜM (mavi gradient)
+────────────────────────────────────────────────────────── */
+.cta-section {
+  background: linear-gradient(to right, #0057A8, #003d7a);
+  border-radius: 24px;
+  padding: 48px 32px;
+}
+
+.cta-h2 {
+  color: #ffffff;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.cta-desc {
+  color: rgba(255,255,255,0.70);
+  font-size: 0.875rem;
+}
+
+.cta-btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  color: #0057A8;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+.cta-btn-white:hover { background-color: #f3f4f6; }
+
+.cta-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid rgba(255,255,255,0.50);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+.cta-btn-outline:hover { background-color: rgba(255,255,255,0.10); }
+
+/* ──────────────────────────────────────────────────────────
+   7. SSS BÖLÜMÜ
+────────────────────────────────────────────────────────── */
+.faq-h2 {
+  color: #111827;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.faq-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #111827;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+.faq-question:hover { background-color: #f9fafb; }
+
+.faq-answer {
+  padding: 0 20px 16px;
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.75;
+}
+
+/* ──────────────────────────────────────────────────────────
+   8. BLOG BÖLÜMÜ
+────────────────────────────────────────────────────────── */
+.blog-h2 {
+  color: #111827;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+}
+
+.blog-card-home {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f3f4f6;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+}
+.blog-card-home:hover {
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.blog-card-home__category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #E31E24;
+  background-color: #fef2f2;
+  padding: 2px 10px;
+  border-radius: 9999px;
+}
+
+.blog-card-home__title {
+  color: #111827;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 8px 0;
+  transition: color 0.2s;
+}
+.blog-card-home:hover .blog-card-home__title { color: #0057A8; }
+
+.blog-card-home__meta {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.blog-read-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0057A8;
+  transition: gap 0.2s, color 0.2s;
+  text-decoration: none;
+}
+.blog-read-link:hover { color: #E31E24; gap: 8px; }
